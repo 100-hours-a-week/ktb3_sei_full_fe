@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>아무 말 대잔치</title>
+  <link href="https://cdn.jsdelivr.net/gh/innks/NanumSquareRound/nanumsquareround.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/board.css" />
+</head>
+<body>
+  <header>
+    <h1>아무 말 대잔치</h1>
+
+    <div class="dropdown">
+      <img id="profileBtn" src="images/profile.png" alt="프로필 이미지" class="profile-icon">
+      <div class="dropdown-content" id="dropdownMenu">
+        <a href="#">회원정보수정</a>
+        <a href="#">비밀번호수정</a>
+        <a href="#">로그아웃</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="board-container">
+      <div class="board-header">
+        <p class="welcome-text">안녕하세요,<br>아무 말 대잔치 <strong>게시판</strong> 입니다.</p>
+        <button class="write-btn">게시글 작성</button>
+      </div>
+
+      <div class="post-list">
+        <div class="post-card">
+          <div class="post-header">
+            <h3>제목 1</h3>
+            <span class="date">2021-01-01 00:00:00</span>
+          </div>
+          <p class="meta">좋아요 0&nbsp;&nbsp;댓글 0&nbsp;&nbsp;조회수 0</p>
+          <div class="author">
+            <div class="author-img"></div>
+            <p class="author-name">더미 작성자 1</p>
+          </div>
+        </div>
+
+        <div class="post-card">
+          <div class="post-header">
+            <h3>제목 2</h3>
+            <span class="date">2021-01-02 00:00:00</span>
+          </div>
+          <p class="meta">좋아요 5&nbsp;&nbsp;댓글 3&nbsp;&nbsp;조회수 10</p>
+          <div class="author">
+            <div class="author-img"></div>
+            <p class="author-name">더미 작성자 2</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="js/board.js"></script>
+
+</body>
+</html>
