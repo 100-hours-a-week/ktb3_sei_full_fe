@@ -1,4 +1,10 @@
-
+import { checkNicknameDuplication } from './modules/validateNickname.js';
+import { showHelperText } from './modules/helperText.js';
+import {}
+    
+    
+    
+    
     const profileBtn = document.getElementById('profileBtn');
     const dropdownMenu = document.getElementById('dropdownMenu');
     profileBtn.addEventListener('click', (e) => {

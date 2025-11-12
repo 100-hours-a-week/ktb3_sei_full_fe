@@ -1,8 +1,9 @@
-import { showHelperText } from './modules/helperText.js';
 import { checkEmailFormat, checkEmailDuplicate } from './modules/validateEmail.js';
 import { checkPasswordFormat, checkPasswordMatch } from './modules/validatePassword.js';
 import { checkNicknameDuplication } from './modules/validateNickname.js';
 import { setupProfileUpload } from './modules/profileUpload.js';
+import { showHelperText } from './modules/helperText.js';
+
 
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.querySelector('.signup-form');
@@ -96,18 +97,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
       alert('회원가입이 완료되었습니다!');
       console.log('회원가입 성공:', data);
-      window.location.href = '/login';
+      window.location.href = './index.html';
     } catch (error) {
       console.error('회원가입 오류:', error);
       alert('회원가입 중 문제가 발생했습니다.');
     }
   });
+
+  const loginLink = document.querySelector('.login-link');
+  if (loginLink) {
+    loginLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.location.href = './index.html';
+  });
+  }
+
+
+
+  const backBtn = document.querySelector('.back-btn');
+    if (backBtn) {
+      backBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.location.href = './index.html';
+      });
+  }
+
 });
 
-const loginLink = document.querySelector('.login-link');
-if (loginLink) {
-  loginLink.addEventListener('click', (e) => {
-    e.preventDefault();
-    window.location.href = '/login.html';
-  });
-}
+
