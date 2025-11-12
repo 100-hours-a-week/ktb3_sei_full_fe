@@ -5,7 +5,7 @@ export function checkEmailFormat(emailInput){
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     
     if(email === ''){
-        showHelperText(emailInput, '이메일을 입력하세요.');
+        showHelperText(emailInput, '이메일을 입력해주세요.');
         return false;
     }
     if(!regex.text(email)){
@@ -21,7 +21,7 @@ export async function checkEmailDuplicate(emailInput){
     const email = emailInput.value.trim();
 
     if(email === ''){
-        showHelperText(emailInput,'이메일을 입력하세요.');
+        showHelperText(emailInput,'이메일을 입력해주세요.');
         return false;
     }
     try{
