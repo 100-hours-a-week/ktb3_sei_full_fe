@@ -8,8 +8,8 @@ export function checkEmailFormat(emailInput){
         showHelperText(emailInput, '이메일을 입력해주세요.');
         return false;
     }
-    if(!regex.text(email)){
-        showHelperText(emailInput, '올바른 이메일 주소 형식을 입력해주세요 (예: example@example.com');
+    if(!regex.test(email)){
+        showHelperText(emailInput, '올바른 이메일 주소 형식을 입력해주세요 <br> (예: example@example.com)');
         return false;
     }
 
@@ -25,7 +25,8 @@ export async function checkEmailDuplicate(emailInput){
         return false;
     }
     try{
-        const response = await fetch(`/users?email=${encodeURIComponent(email)}`);
+        const response = await fetch(`http://localhost:8080/users?email=${encodeURIComponent(email)}`);
+;
         const message = await response.text();
 
         showHelperText(emailInput, message);

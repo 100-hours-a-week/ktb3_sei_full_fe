@@ -1,80 +1,113 @@
-import {showHelperText} from './module/helperText.js';
-import { checkNicknameDuplication } from './module/validateNickname.js';
+import { showHelperText } from './modules/helperText.js';
+import { checkEmailFormat, checkEmailDuplicate } from './modules/validateEmail.js';
+import { checkPasswordFormat, checkPasswordMatch } from './modules/validatePassword.js';
+import { checkNicknameDuplication } from './modules/validateNickname.js';
+import { setupProfileUpload } from './modules/profileUpload.js';
+
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.querySelector('.signup-form');
+  const emailInput = document.getElementById('email');
+  const passwordInput = document.getElementById('password');
+  const passwordCheckInput = document.getElementById('password-check');
+  const nicknameInput = document.getElementById('nickname');
+  const profileCircle = document.querySelector('.profile-circle');
+  const signupBtn = document.querySelector('.signup-btn');
+
+  const profileUploader = setupProfileUpload(profileCircle);
 
 
-document.addEventListener('DOMContentLoaded',() =>{
-    const form = document.querySelector('.signup-form');
-    const emailInput = document.getElementById('email');
-    const passwordInput = document.getElementById('password');
-    const passwordCheckInput = document.getElementById('password-check');
-    const nicknameInput = document.getElementById('nickname');
-    const profileCircle = document.querySelector('.profile-circle');
-    const profilePlus = document.querySelector('.plus');
+  signupBtn.disabled = true;
+  signupBtn.style.backgroundColor = '#ACA0EB';
 
-    const fileInput = document.createElement('input');
-    fileInput.type = 'file';
-    fileInput.accept = 'image/*';
-    fileInput.style.display = 'none';
-    document.body.appendChild(fileInput);
 
-    profileCircle.addEventListener('click',()=>{
-        fileInput.click();
-    });
+  async function updateButtonState() {
+    const emailValid =
+      checkEmailFormat(emailInput) && (await checkEmailDuplicate(emailInput));
+    const passwordValid = checkPasswordFormat(passwordInput);
+    const passwordMatch = checkPasswordMatch(passwordInput, passwordCheckInput);
+    const nicknameValid = await checkNicknameDuplication(nicknameInput);
 
-    fileInput.addEventListener('change',(e)=>{
-        const file = e.target.files[0];
-        if(!file) return;
+    const allValid =
+      emailValid && passwordValid && passwordMatch && nicknameValid;
 
-        const reader = new FileReader();
-        reader.onload = (evant) => {
-            const img = document.createElement('img');
-            img.src = event.target.result;
-            profileCircle.innerHTML = '';
-        };
-        reader.readAsDataURL(file);
-    });
-
-    
-
-    // 이메일 검사
-    function isValidEmail(email) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    if (allValid) {
+      signupBtn.disabled = false;
+      signupBtn.style.backgroundColor = '#7F6AEE';
+    } else {
+      signupBtn.disabled = true;
+      signupBtn.style.backgroundColor = '#ACA0EB';
     }
 
-    //비밀번호 검사
-    function isValidPassword(password) {
-    const regex =
-    /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,20}$/;
-    return regex.test(password);
+    return allValid;
+  }
+
+
+  [emailInput, passwordInput, passwordCheckInput, nicknameInput].forEach(
+    (input) => {
+      input.addEventListener('input', async () => {
+
+        if (input === emailInput) checkEmailFormat(emailInput);
+        if (input === passwordInput) checkPasswordFormat(passwordInput);
+        if (input === passwordCheckInput)
+          checkPasswordMatch(passwordInput, passwordCheckInput);
+        if (input === nicknameInput) await checkNicknameDuplication(nicknameInput); // ✅ 추가
+
+        updateButtonState();
+      });
+
+     
+
+      input.addEventListener('blur', async () => {
+        if (input === emailInput) await checkEmailDuplicate(emailInput);
+        if (input === nicknameInput) await checkNicknameDuplication(nicknameInput);
+        updateButtonState();
+      });
+    }
+  );
+
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const isAllValid = await updateButtonState();
+    if (!isAllValid) {
+      alert('입력한 정보를 다시 확인해주세요.');
+      return;
     }
 
-    form.addEventListener('submit', (e)=>{
-        e.preventDefault();
+    const profileImageUrl = profileUploader();
 
-        let isValid = true;
+    const requestData = {
+      email: emailInput.value.trim(),
+      password: passwordInput.value.trim(),
+      nickname: nicknameInput.value.trim(),
+      profile_image: profileImageUrl || null,
+    };
 
-        if(!isValidEmail(emailInput.value)){
-            showHelperText(emailInput, '올바른 이메일 주소 형식을 입력해주세요(예: example@example.com');
-            isValid = false;
-        }else{
-            showHelperText(emailInput,'');
-        }
+    try {
+      const response = await fetch('http://localhost:8080/users/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(requestData),
+      });
 
-        if(!isValidPassword(passwordInput.value)){
-            showHelperText(passwordInput, '비밀번호는 8자 이상, 20자 이하이며, 대문자, 소문자, 숫자, 특수문자를 최소 1개씩 포함해야 합니다.');
-            isValid = false;
-        }else{
-            showHelperText(passwordInput,'');
-        }
+      if (!response.ok) throw new Error('회원가입 실패');
+      const data = await response.json();
 
-        if(passwordInput.value !== passwordCheckInput.value){
-            showHelperText(passwordCheckInput,'비밀번호가 일치하지 않습니다.');
-            isValid = false;
-        }else{
-            showHelperText(passwordCheckInput,'');
-        }
-    })
+      alert('회원가입이 완료되었습니다!');
+      console.log('회원가입 성공:', data);
+      window.location.href = '/login';
+    } catch (error) {
+      console.error('회원가입 오류:', error);
+      alert('회원가입 중 문제가 발생했습니다.');
+    }
+  });
+});
 
-
-
-})
+const loginLink = document.querySelector('.login-link');
+if (loginLink) {
+  loginLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.location.href = '/login.html';
+  });
+}
