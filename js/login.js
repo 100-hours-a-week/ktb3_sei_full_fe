@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = await response.json();
             alert('로그인 성공!');
             console.log('로그인 성공:', data);
-            window.location.href = '/post.html'; 
+            window.location.href = '/board.html'; 
         } catch (error) {
             console.error('로그인 오류:', error);
             alert('서버 연결 중 오류가 발생했습니다.');

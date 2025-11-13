@@ -1,11 +1,11 @@
 import { checkNicknameDuplication } from './modules/validateNickname.js';
 import { showHelperText } from './modules/helperText.js';
-import {}
+import { setupProfileUpload } from './modules/profileUpload.js';
     
     
-    
-    
-    const profileBtn = document.getElementById('profileBtn');
+document.addEventListener('DOMContentLoaded', ()=>{
+
+      const profileBtn = document.getElementById('profileBtn');
     const dropdownMenu = document.getElementById('dropdownMenu');
     profileBtn.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -16,6 +16,17 @@ import {}
         dropdownMenu.classList.remove('show');
       }
     });
+
+    const profileCircle = document.querySelector('.profile-circle');
+    const getSelectedImage = setupProfileUpload(profileCircle);
+
+    const nicknameInput = document.querySelector('.form-group input[placeholder]');
+    const editBtn = document.querySelector('.small-btn');
+    const submitBtn = document.querySelector('.submit-btn');
+  
+});
+    
+
 
   
     const modalOverlay = document.getElementById('modalOverlay');

@@ -2,6 +2,7 @@ body {
   font-family: 'NanumSquareRound', sans-serif;
   background-color: #f4f5f7;
   margin: 0;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -9,20 +10,19 @@ body {
 
 header {
   width: 100%;
-  border-bottom: 1px solid #000;
+  text-align: center;
+  border-bottom: 1px solid #000000;
   padding: 20px 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   position: relative;
   background-color: #f4f5f7;
 }
 
 header h1 {
-  font-size: 24px;
+  font-size: 32px;
+  height: 38px;
+  font-weight: 400;
   color: #111;
   margin: 0;
-  font-weight: 400;
 }
 
 .back-btn {
@@ -89,27 +89,33 @@ header h1 {
 }
 
 main {
-  width: 100%;
+  flex-grow: 1;
   display: flex;
   justify-content: center;
-  padding: 60px 0;
+  align-items: flex-start;
+  width: 100%;
+  padding-top: 80px;
 }
 
 .edit-container {
-  width: 445px;
   background: #f4f5f7;
+  border-radius: 10px;
+  padding: 40px 45px;
+  width: 340px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .edit-title {
-  font-size: 20px;
-  font-weight: 800;
-  margin-bottom: 40px;
-  color: #111;
+  margin-bottom: 30px;
+  font-size: 32px;
+  font-weight: 700;
 }
 
 .profile-section {
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 
 .profile-label {
@@ -154,31 +160,34 @@ main {
   cursor: pointer;
 }
 
-.edit-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-}
-
 .form-group {
-  width: 80%;
   text-align: left;
+  margin-bottom: 20px;
+  width: 100%;
 }
 
 label {
-  font-size: 14px;
-  color: #111;
-  font-weight: 700;
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #333;
 }
 
 input[type="text"] {
-  width: 100%;
+  width: 355px;
+  height: 33px;
+  padding: 10px 12px;
   border: 1px solid #000000;
-  border-radius: 8px;
-  padding: 12px;
-  font-size: 14px;
-  background-color: #fff;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  background-color: #f4f5f7;
+  transition: border-color 0.2s ease;
+  box-sizing: border-box;
+}
+
+input[type="text"]:focus {
+  border-color: #bfa9f3;
   outline: none;
 }
 
@@ -187,19 +196,29 @@ input[readonly] {
   border-color: transparent;
 }
 
+.helper-text {
+  color: #d14b4b;
+  font-size: 0.75rem;
+  margin-top: 4px;
+  min-height: 16px;
+}
+
 .small-btn {
+  width: 355px;
+  height: 33px;
   background-color: #ACA0EB;
-  color: #fff;
+  color: #f4f5f7;
   border: none;
-  border-radius: 12px;
-  padding: 10px 0;
-  font-size: 14px;
+  border-radius: 6px;
+  font-size: 1rem;
   cursor: pointer;
-  width: 80%;
-  max-width: 400px;
-  font-weight: 600;
   transition: background 0.25s ease;
-  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px auto 0;
 }
 
 .small-btn:hover {
@@ -211,18 +230,18 @@ input[readonly] {
   border: none;
   color: #666;
   font-size: 13px;
-  margin-top: -6px;
+  margin-top: 8px;
   cursor: pointer;
   text-decoration: underline;
 }
 
 .submit-btn {
-  margin-top: 30px;
+  margin-top: 20px;
   background-color: #ACA0EB;
   color: #fff;
   border: none;
   border-radius: 30px;
-  padding: 12px 36px;
+  padding: 10px 28px;
   font-size: 14px;
   cursor: pointer;
   font-weight: 600;
