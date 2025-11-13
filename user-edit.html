@@ -17,7 +17,7 @@
     <h1>아무 말 대잔치</h1>
 
     <div class="dropdown">
-      <img id="profileBtn" src="images/profile.png" alt="프로필" class="profile-icon" />
+      <img id="profileBtn"  alt="프로필" class="profile-icon" />
       <div class="dropdown-content" id="dropdownMenu">
         <a href="#">회원정보수정</a>
         <a href="#">비밀번호수정</a>
@@ -33,7 +33,7 @@
       <div class="profile-section">
         <p class="profile-label">프로필 사진<span class="required">*</span></p>
         <div class="profile-circle">
-          <img id="profileImage" src="images/profile.png" alt="프로필 이미지">
+          <img id="profileImage"  alt="프로필 이미지">
           <input type="file" id="profileInput" accept="image/*" style="display:none;">
           <button type="button" class="change-btn" onclick="document.getElementById('profileInput').click();">변경</button>
         </div>
@@ -42,13 +42,13 @@
       <form class="edit-form">
         <div class="form-group">
           <label>이메일</label>
-          <input type="text" value="startupcode@gmail.com" readonly>
+          <input type="text"  readonly>
         </div>
 
         <div class="form-group">
           <label>닉네임</label>
-          <input type="text" placeholder="닉네임을 입력해주세요." value="스타트업코드">
-          <p class="helper-text" id="nickname-helper">*helper text</p>
+          <input type="text" id="nicknameInput" placeholder="닉네임을 입력해주세요.">
+          <p class="helper-text" id="nickname-helper"></p>
 
         </div>
 

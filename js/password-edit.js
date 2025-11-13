@@ -1,5 +1,6 @@
 import { setupDropdownActions, setupDropdownMenu } from './modules/dropdownMenu.js';
 import { checkPasswordFormat, checkPasswordMatch } from './modules/validatePassword.js';
+import { loadUserProfileIcon } from './modules/profileIcon.js';
 
 document.addEventListener('DOMContentLoaded',()=>  {
   setupDropdownMenu();
@@ -91,3 +92,5 @@ document.addEventListener('DOMContentLoaded',()=>  {
   }
  
   });
+
+loadUserProfileIcon();

@@ -1,4 +1,6 @@
 import { setupDropdownMenu, setupDropdownActions } from './modules/dropdownMenu.js';
+import { loadUserProfileIcon } from './modules/profileIcon.js';
+
 
 const urlParams = new URLSearchParams(window.location.search);
 const postId = urlParams.get("postId");
@@ -230,5 +232,8 @@ setupDropdownMenu();
 setupDropdownActions();
 
 document.querySelector(".back-btn").addEventListener("click", () => {
-  history.back();
+  window.location.href = "./board.html"; 
 });
+
+loadUserProfileIcon();
+

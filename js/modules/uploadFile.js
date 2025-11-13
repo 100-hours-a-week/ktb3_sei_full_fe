@@ -1,4 +1,4 @@
-export async function uploadFile(file, uploadUrl = "http://localhost:8080/images/upload") {
+export async function uploadFile(file, uploadUrl = "http://127.0.0.1:8080/images/upload") {
   if (!file) return null;
 
   const formData = new FormData();

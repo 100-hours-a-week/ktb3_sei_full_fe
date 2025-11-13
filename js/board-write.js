@@ -1,6 +1,7 @@
 import { setupDropdownMenu, setupDropdownActions } from './modules/dropdownMenu.js';
 import { uploadFile } from "./modules/uploadFile.js";
 import { showHelperText } from './modules/helperText.js'; 
+import { loadUserProfileIcon } from './modules/profileIcon.js';
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -111,3 +112,5 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+
+loadUserProfileIcon();

@@ -1,4 +1,5 @@
 import { setupDropdownMenu, setupDropdownActions } from './modules/dropdownMenu.js';
+import { loadUserProfileIcon } from './modules/profileIcon.js';
 
 document.addEventListener('DOMContentLoaded',() => {
   setupDropdownMenu();
@@ -102,3 +103,4 @@ document.addEventListener('DOMContentLoaded',() => {
 
 
 });
+loadUserProfileIcon();
