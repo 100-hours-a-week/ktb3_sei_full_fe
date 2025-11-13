@@ -189,3 +189,13 @@ input[type="text"]::placeholder,
 textarea::placeholder {
   color: #999;
 }
+
+
+.helper-text {
+  color: #d14b4b;
+  font-size: 0.75rem;
+  margin-top: 3px;
+  margin-bottom: 0;
+  white-space: normal; 
+  min-height: 16px;
+}
