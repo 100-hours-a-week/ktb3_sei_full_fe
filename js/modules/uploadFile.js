@@ -15,6 +15,7 @@ export async function uploadFile(file, uploadUrl = "http://localhost:8080/images
 
     if (response.ok) {
       return result.url;    
+
     } else {
       alert(result.message || "파일 업로드 실패");
       return null;

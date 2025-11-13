@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded',() => {
       <p class="meta">좋아요 ${likeCount}&nbsp;&nbsp;댓글 ${commentCount}&nbsp;&nbsp;조회수 ${viewCount}</p>
       <div class="author">
         <div class="author-img" style="background-image:url('${post.authorImageUrl || ''}')"></div>
-        <p class="author-name">${post.authorName || '익명 사용자'}</p>
+        <p class="author-name">${post.nickname || '익명 사용자'}</p>
       </div>
     `;
 

@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded',()=>  {
     const newPassword = passwordInput.value.trim();
 
     try{
-      const response= await fetch('http://localhost:8080/users/password',{
+      const response= await fetch('http://127.0.0.1:8080/users/password',{
         method: 'PATCH',
         headers:{
           'Content-Type': 'application/json',
