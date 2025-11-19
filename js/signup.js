@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   signupBtn.disabled = true;
-  signupBtn.style.backgroundColor = '#ACA0EB';
+  signupBtn.style.backgroundColor = '#92A583';
 
   async function updateButtonState() {
     const emailValid = checkEmailFormat(emailInput) && (await checkEmailDuplicate(emailInput));
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const allValid = emailValid && passwordValid && passwordMatch && nicknameValid;
     signupBtn.disabled = !allValid;
-    signupBtn.style.backgroundColor = allValid ? '#7F6AEE' : '#ACA0EB';
+    signupBtn.style.backgroundColor = allValid ? '#92A583' : '#92A583';
     return allValid;
   }
 

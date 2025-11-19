@@ -49,7 +49,7 @@ export function setupDropdownActions(menuId = 'dropdownMenu') {
       e.preventDefault();
       localStorage.removeItem('token');
       alert('로그아웃되었습니다.');
-      window.location.href = '/index.html';
+      window.location.href = '/welcome.html';
     });
   }
 }

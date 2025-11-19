@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>welcome</title>
+
+  
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/welcome.css" />
+</head>
+<body>
+
+  <div class="welcome-wrapper" id="welcome">
+    <div class="inner-box">
+
+      <div class="center-wrap">
+        <p class="small">welcome to</p>
+        <p class="main-text">Shhh..</p>
+        <p class="sub-text">We'll keep your secret. <br> Just let it out.</p>
+
+      </div>
+
+      <p class="click-start">click to start</p>    </div>
+  </div>
+
+  <script>
+    document.body.addEventListener('click', () => {
+      const wrapper = document.getElementById('welcome');
+      wrapper.classList.add('slide-up');
+
+      setTimeout(() => {
+        window.location.href = "/index.html";
+      }, 700);
+    });
+  </script>
+
+</body>
+</html>

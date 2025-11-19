@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const signUpLink = document.querySelector('.signup-link');
 
     loginBtn.disabled = true;
-    loginBtn.style.backgroundColor = '#ACA0EB';
+    loginBtn.style.backgroundColor = '#655447';
 
     function updateButtonState(){
         const emailValid = checkEmailFormat(emailInput);
@@ -20,10 +20,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if(emailValid && passwordValid){
             loginBtn.disabled = false;
-            loginBtn.style.backgroundColor = '#7F6AEE';
+            loginBtn.style.backgroundColor = '#655447';
         } else {
             loginBtn.disabled = true;
-            loginBtn.style.backgroundColor = '#ACA0EB';
+            loginBtn.style.backgroundColor = '#655447';
         }
     }
     [emailInput, passwordInput].forEach((input) => {

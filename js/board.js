@@ -46,16 +46,20 @@ document.addEventListener('DOMContentLoaded',() => {
     const card = document.createElement('div');
     card.classList.add('post-card');
     card.innerHTML = `
-      <div class="post-header">
-        <h3>${title}</h3>
-        <span class="date">${date}</span>
-      </div>
-      <p class="meta">좋아요 ${likeCount}&nbsp;&nbsp;댓글 ${commentCount}&nbsp;&nbsp;조회수 ${viewCount}</p>
-      <div class="author">
+    <div class="author-row">
         <div class="author-img" style="background-image:url('${post.authorImageUrl || ''}')"></div>
         <p class="author-name">${post.nickname || '익명 사용자'}</p>
-      </div>
-    `;
+        <span class="date">${date}</span>
+    </div>
+
+    <div class="post-title">${title}</div>
+
+    <div class="meta">
+        좋아요 ${likeCount} &nbsp;&nbsp;
+        조회수 ${viewCount} &nbsp;&nbsp;
+        댓글 ${commentCount}
+    </div>
+  `;
 
     card.addEventListener('click', () => {
       window.location.href = `/board-detail.html?postId=${post.id}`;
