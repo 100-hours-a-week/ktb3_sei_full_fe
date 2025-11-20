@@ -15,7 +15,7 @@ const dateEl = document.querySelector(".post-date");
 const imageEl = document.querySelector(".post-image");
 const contentEl = document.querySelector(".post-content");
 
-const likeCountBox = document.querySelector(".count-box div:nth-child(1)");
+const likeCountBox = document.querySelector(".like-box");
 const viewCountBox = document.querySelector(".count-box div:nth-child(2)");
 const commentCountBox = document.querySelector(".count-box div:nth-child(3)");
 
@@ -62,14 +62,19 @@ async function fetchPostDetail() {
 }
 
 function updateLikeUI() {
-  likeCountBox.innerHTML = `<span>${formatNumber(currentLikeCount)}</span><br>좋아요수`;
+  likeCountBox.innerHTML =
+    `<span class="count-number">${formatNumber(currentLikeCount)}</span>
+     <span class="count-label">좋아요수</span>`;
 
   if (isLiked) {
-    likeCountBox.style.backgroundColor = "#ACA0EB";
+    likeCountBox.style.backgroundColor = "#DCE7D3";
+    likeCountBox.style.border = "2px solid #92A583";
   } else {
-    likeCountBox.style.backgroundColor = "#D9D9D9";
+    likeCountBox.style.backgroundColor = "#FFFFFF";  
+    likeCountBox.style.border = "2px solid #E5E5E0";
   }
 }
+
 
 function renderPost(post) {
   titleEl.textContent = post.title;
@@ -77,11 +82,17 @@ function renderPost(post) {
   dateEl.textContent = post.createdAt;
 
   let imgUrl = post.imageUrl;
+
+  if (!imgUrl || imgUrl.trim() === "") {
+    imageEl.style.display = "none";   // ← 회색 네모 숨기기
+  } else{
+  
   if (imgUrl && !imgUrl.startsWith("http")) {
     imgUrl = "http://127.0.0.1:8080" + imgUrl;
   }
   if (imgUrl) imageEl.src = imgUrl.trim();
-
+     imageEl.style.display = "block";
+  }
   contentEl.textContent = post.content;
 
   currentLikeCount = post.likeCount;
@@ -89,9 +100,13 @@ function renderPost(post) {
 
   updateLikeUI();
 
-  viewCountBox.innerHTML = `<span>${formatNumber(post.viewCount)}</span><br>조회수`;
-  commentCountBox.innerHTML = `<span>${formatNumber(post.commentCount)}</span><br>댓글`;
-}
+  viewCountBox.innerHTML =
+    `<span class="count-number">${formatNumber(post.viewCount)}</span>
+     <span class="count-label">조회수</span>`;
+   commentCountBox.innerHTML =
+      `<span class="count-number">${formatNumber(post.commentCount)}</span>
+      <span class="count-label">댓글</span>`;
+    }
 
 async function toggleLike() {
   try {
@@ -140,8 +155,8 @@ function renderComments(comments) {
     node.querySelector(".edit-comment").addEventListener("click", () => {
       editingCommentId = c.id;
       commentTextarea.value = c.content;
-      commentBtn.textContent = "댓글 수정";
-      commentBtn.style.backgroundColor = "#7F6AEE";
+      commentBtn.textContent = "CONFIRM";
+      commentBtn.style.backgroundColor = "#665A51";
     });
 
     node.querySelector(".delete-comment").addEventListener("click", () => {
@@ -152,13 +167,15 @@ function renderComments(comments) {
     commentListEl.appendChild(node);
   });
 
-  commentCountBox.innerHTML = `<span>${formatNumber(comments.length)}</span><br>댓글`;
+    commentCountBox.innerHTML =
+      `<span class="count-number">${formatNumber(comments.length)}</span>
+      <span class="count-label">댓글</span>`;
 }
 
 commentTextarea.addEventListener("input", () => {
   const empty = commentTextarea.value.trim() === "";
   commentBtn.disabled = empty;
-  commentBtn.style.backgroundColor = empty ? "#ACA0EB" : "#7F6AEE";
+  commentBtn.style.backgroundColor = empty ? "#665A51" : "#665A51";
 });
 
 commentBtn.addEventListener("click", async () => {
@@ -183,37 +200,79 @@ commentBtn.addEventListener("click", async () => {
 
   editingCommentId = null;
   commentTextarea.value = "";
-  commentBtn.textContent = "댓글 등록";
-  commentBtn.style.backgroundColor = "#ACA0EB";
+  commentBtn.textContent = "POST";
+  commentBtn.style.backgroundColor = "#665A51";
 
   fetchPostDetail();
 });
+
+
 
 confirmCommentDelete.addEventListener("click", async () => {
   if (!deletingCommentId) return;
 
-  await fetch(`http://127.0.0.1:8080/posts/${postId}/comments/${deletingCommentId}`, {
-    method: "DELETE",
-    credentials: "include",
-  });
+  try {
+    const response = await fetch(`http://127.0.0.1:8080/posts/${postId}/comments/${deletingCommentId}`, {
+      method: "DELETE",
+      credentials: "include",
+    });
 
-  deletingCommentId = null;
-  commentDeleteModal.style.display = "none";
-  fetchPostDetail();
+    const result = await response.json();
+
+    if (!response.ok) {
+      alert(result.message || "본인 댓글만 삭제할 수 있습니다.");
+      return; 
+    }
+
+    
+    alert("댓글이 삭제되었습니다.");
+    deletingCommentId = null;
+    commentDeleteModal.style.display = "none";
+    fetchPostDetail();
+
+  } catch (e) {
+    console.error(e);
+    alert("댓글 삭제 중 오류가 발생했습니다.");
+  }
 });
+
+
+
 
 editPostBtn.addEventListener("click", () => {
   window.location.href = `/board-edit.html?postId=${postId}`;
 });
 
+
+
 confirmPostDelete.addEventListener("click", async () => {
-  await fetch(`http://127.0.0.1:8080/posts/${postId}`, {
-    method: "DELETE",
-    credentials: "include",
-  });
-  alert("게시글이 삭제되었습니다.");
-  window.location.href = "/board.html";
+  try {
+    const response = await fetch(`http://127.0.0.1:8080/posts/${postId}`, {
+      method: "DELETE",
+      credentials: "include",
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      // 백엔드에서 권한 부족 메시지를 보낸 경우
+      alert(result.message || "본인 게시글만 삭제할 수 있습니다.");
+      postDeleteModal.style.display = "none";
+      return;
+    }
+
+    // 성공한 경우
+    alert("게시글이 삭제되었습니다.");
+    window.location.href = "/board.html";
+
+  } catch (e) {
+    console.error(e);
+    alert("삭제 중 오류가 발생했습니다.");
+  }
 });
+
+
+
 
 deletePostBtn.addEventListener('click', () => {
   postDeleteModal.style.display = 'flex';

@@ -76,12 +76,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (isFilled) {
       submitBtn.disabled = false;
-      submitBtn.style.backgroundColor = "#7F6AEE";
+      submitBtn.style.backgroundColor = "#655447";
       submitBtn.style.cursor = "pointer";
       showHelperText(contentInput, '');
     } else {
       submitBtn.disabled = true;
-      submitBtn.style.backgroundColor = "#ACA0EB";
+      submitBtn.style.backgroundColor = "#655447";
       submitBtn.style.cursor = "not-allowed";
       showHelperText(contentInput, message);
     }

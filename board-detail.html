@@ -4,80 +4,92 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>게시글 보기</title>
-  <link href="https://cdn.jsdelivr.net/gh/innks/NanumSquareRound/nanumsquareround.min.css" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/board-detail.css" />
 </head>
+
 <body>
-  <header>
-    <button class="back-btn">
+
+  <div class="frame-wrapper">
+      <header class="header">
+      <button class="back-btn">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" stroke="#111" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="15 18 9 12 15 6" />
+          <polyline points="15 18 9 12 15 6" />
         </svg>
-    </button>
-    <h1>아무 말 대잔치</h1>
+      </button>
 
-    <div class="dropdown">
-      <img id="profileBtn"  alt="프로필" class="profile-icon" />
-      <div class="dropdown-content" id="dropdownMenu">
-        <a href="#">회원정보수정</a>
-        <a href="#">비밀번호수정</a>
-        <a href="#">로그아웃</a>
+      <div class="dropdown">
+        <img id="profileBtn" alt="프로필" class="profile-icon" />
+        <div class="dropdown-content" id="dropdownMenu">
+          <a href="#">회원정보수정</a>
+          <a href="#">비밀번호수정</a>
+          <a href="#">로그아웃</a>
+        </div>
       </div>
-    </div>
-  </header>
+    </header>
 
-  <main>
-    <div class="post-container">
-      <div class="post-header">
-        <h2 class="post-title">제목 1</h2>
+    <!-- 하얀 책 보드 -->
+    <div class="white-board">
+      <div class="board-divider"></div>
+
+      <!-- 왼쪽 페이지: 게시글 -->
+      <section class="left-pane">
+
+        <div class="post-top">
+          <h2 class="post-title"></h2>
+        </div>
+
+        <div class="author-info">
+          <span class="author-name"></span>
+          <span class="post-date"></span>
+        </div>
+
+        <img class="post-image" id="postImage"  />
+
+        <div class="count-box">
+          <div class="count-item like-box">
+            <span class="count-number">0</span>
+            <span class="count-label">좋아요수</span>
+          </div>
+
+          <div class="count-item">
+            <span class="count-number">27</span>
+            <span class="count-label">조회수</span>
+          </div>
+
+          <div class="count-item">
+            <span class="count-number">6</span>
+            <span class="count-label">댓글</span>
+          </div>
+        </div>
+
+        <div class="post-scroll">
+          <p class="post-content"></p>
+        </div>
+
         <div class="action-btns">
           <button class="edit-post">수정</button>
           <button class="delete-post">삭제</button>
         </div>
-      </div>
 
-      <div class="author-info">
-        <div class="author-img"></div>
-        <span class="author-name">더미 작성자1</span>
-        <span class="post-date">2021-01-01 00:00:00</span>
-      </div>
+      </section>
 
-      <img class="post-image" id="postImage">
-      <p class="post-content">
-      </p>
+      <!-- 오른쪽 페이지: 댓글 -->
+      <section class="right-pane">
 
-      <div class="count-box">
-        <div>123 좋아요</div>
-        <div>123 조회수</div>
-        <div>123 댓글</div>
-      </div>
-
-      <div class="comment-section">
         <div class="comment-input">
-          <textarea placeholder="댓글을 남겨주세요!"></textarea>
-          <button class="comment-btn">댓글 등록</button>
+          <textarea placeholder="내용을 입력해주세요."></textarea>
+          <button class="comment-btn" disabled>POST</button>
         </div>
 
-        <div class="comment-list">
-          <div class="comment">
-            <div class="comment-left">
-              <div class="comment-author-img"></div>
-              <div>
-                <p class="author-name">더미 작성자1</p>
-                <p class="comment-meta">2021-01-01 00:00:00</p>
-                <p class="comment-body">댓글 내용</p>
-              </div>
-            </div>
-            <div class="comment-actions">
-              <button class="edit-comment">수정</button>
-              <button class="delete-comment">삭제</button>
-            </div>
-          </div>
-        </div>
-      </div>
+        <div class="comment-list"></div>
+
+      </section>
     </div>
-  </main>
+  </div>
 
+  <!-- 게시글 삭제 모달 -->
   <div class="modal-overlay" id="postDeleteModal" style="display: none;">
     <div class="modal">
       <h2>게시글을 삭제하시겠습니까?</h2>
@@ -89,6 +101,7 @@
     </div>
   </div>
 
+  <!-- 댓글 삭제 모달 -->
   <div class="modal-overlay" id="commentDeleteModal" style="display: none;">
     <div class="modal">
       <h2>댓글을 삭제하시겠습니까?</h2>
@@ -101,6 +114,5 @@
   </div>
 
   <script type="module" src="js/board-detail.js"></script>
-
 </body>
 </html>

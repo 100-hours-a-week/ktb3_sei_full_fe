@@ -5,14 +5,18 @@ import { loadUserProfileIcon } from './modules/profileIcon.js';
 document.addEventListener('DOMContentLoaded',()=>  {
   setupDropdownMenu();
   setupDropdownActions();
+  
+  document.querySelector('.back-btn').addEventListener('click', () => {
+    window.location.href = './board.html';
+  });
 
   const form = document.querySelector('.edit-form');
   const passwordInput = document.getElementById('password');
   const passwordCheckInput = document.getElementById('password-check');
-  const submitBtn = form.querySelector('.small-btn');
+  const submitBtn = form.querySelector('.submit-btn');
 
   submitBtn.disabled = true;
-  submitBtn.style.backgroundColor = '#D9D9D9';
+  submitBtn.style.backgroundColor = '#92A583';
   submitBtn.style.cursor = 'not-allowed';
 
   form.addEventListener('input', () => {
@@ -23,7 +27,7 @@ document.addEventListener('DOMContentLoaded',()=>  {
 
     if (validPassword && matchPassword) {
       submitBtn.disabled = false;
-      submitBtn.style.backgroundColor = '#ACA0EB';
+      submitBtn.style.backgroundColor = '#92A583';
       submitBtn.style.cursor = 'pointer';
     }
   });
@@ -55,7 +59,7 @@ document.addEventListener('DOMContentLoaded',()=>  {
         passwordInput.value = '';
         passwordCheckInput.value = '';
         submitBtn.disabled = true;
-        submitBtn.style.backgroundColor = '#D9D9D9';
+        submitBtn.style.backgroundColor = '#92A583';
         submitBtn.style.cursor = 'not-allowed';
       } else {
         alert(result.message || '비밀번호 수정 실패');

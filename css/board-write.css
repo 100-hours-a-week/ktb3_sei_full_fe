@@ -1,11 +1,9 @@
-/* ===== 전체 배경 ===== */
 body {
   margin: 0;
   background: #FFFFF9;
   font-family: 'Inter', sans-serif;
 }
 
-/* ===== 초록 프레임 ===== */
 .frame-wrapper {
   width: 95%;
   min-height: 95vh;
@@ -18,7 +16,6 @@ body {
   position: relative;
 }
 
-/* ====== 프로필 드롭다운 (네가 준 CSS 그대로) ====== */
 .dropdown {
   position: absolute;
   top: 30px;
@@ -71,7 +68,6 @@ body {
   background-color: #e0e0d6;
 }
 
-/* ===== 작성 폼 ===== */
 .write-container {
   width: 640px;
   margin: 70px auto 0;
@@ -84,7 +80,6 @@ body {
   box-shadow: 0 6px 15px rgba(0,0,0,0.1);
 }
 
-/* ===== 폼 그룹 ===== */
 .form-group {
   margin-bottom: 35px;
 }
@@ -97,7 +92,6 @@ label {
   margin-bottom: 10px;
 }
 
-/* ===== 입력창 ===== */
 input[type="text"],
 textarea {
   width: 100%;
@@ -164,8 +158,8 @@ textarea::placeholder {
 }
 .back-btn {
   position: absolute;
-  top: 20px;       /* 상단에서 20px */
-  left: 20px;      /* 왼쪽에서 20px */
+  top: 20px;      
+  left: 20px;      
   background: none;
   border: none;
   cursor: pointer;
