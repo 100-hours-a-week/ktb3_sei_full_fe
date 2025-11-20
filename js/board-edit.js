@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const form = document.querySelector('.write-form');
   const titleInput = document.querySelector('.write-form input[type="text"]');
   const contentInput = document.querySelector('.write-form textarea');
-  const imageInput = document.getElementById('file');
+  const imageInput = document.getElementById('image');
   const fileLabel = document.querySelector('.file-label');
   const submitBtn = document.querySelector('.submit-btn');
 

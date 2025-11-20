@@ -6,7 +6,7 @@ const urlParams = new URLSearchParams(window.location.search);
 const postId = urlParams.get("postId");
 if (!postId) {
   alert("잘못된 접근입니다.");
-  window.location.href = "/posts.html";
+  window.location.href = "/board.html";
 }
 
 const titleEl = document.querySelector(".post-title");
