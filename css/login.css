@@ -10,7 +10,6 @@ body {
   height: 100vh;
 }
 
-/* 전체 테두리 박스 */
 .login-wrapper {
   width: 95%;
   height: 90%;
@@ -23,14 +22,12 @@ body {
   align-items: center;
 }
 
-/* 내부 content */
 .login-box {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-/* LOGIN 제목 */
 .login-title {
   font-size: 42px;
   font-weight: 800;
@@ -41,14 +38,12 @@ body {
   margin-bottom: 50px;
 }
 
-/* 폼 input 전체 */
 .login-form {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-/* 개별 input 그룹 */
 .input-group {
   width: 320px;
   margin-bottom: 20px;
@@ -88,7 +83,6 @@ body {
 }
 
 
-/* helper text */
 .helper-text {
   font-size: 12px;
   font-style: italic;
@@ -96,7 +90,6 @@ body {
   margin-top: 6px;
 }
 
-/* 로그인 버튼 */
 .login-btn {
   width: 180px;
   height: 42px;
@@ -120,7 +113,6 @@ body {
   transform: scale(1.03);
 }
 
-/* 회원가입 링크 */
 .signup-link {
   font-size: 14px;
   margin-top: 10px;
