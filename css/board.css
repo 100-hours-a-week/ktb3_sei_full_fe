@@ -92,12 +92,12 @@ body {
   max-width: 380px;
   height: auto;
   background: #fcfcf2;
-  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  box-shadow: 0 3px 5px rgba(0,0,0,0.2);
   cursor: pointer;
   position: relative;
   padding: 55px 0 30px;
   border-radius: 5%;
-    border: 1.5px solid #c7baad55;
+  border: 1.5px solid #c7baad55;
 
 
   display: flex;
