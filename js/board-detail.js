@@ -31,7 +31,6 @@ const cancelPostDelete = document.getElementById('cancelPostDelete');
 const confirmPostDelete = document.getElementById('confirmPostDelete');
 
 const commentDeleteModal = document.getElementById('commentDeleteModal');
-const cancelCommentDelete = document.getElementById('cancelCommentDelete');
 const confirmCommentDelete = document.getElementById('confirmCommentDelete');
 
 let deletingCommentId = null;
@@ -193,7 +192,7 @@ commentBtn.addEventListener("click", async () => {
         body: JSON.stringify({ content }),
       });
     } else {
-      await fetch(`http://127.0.0.1:8080/posts/${postId}/comments`, {
+      response = await fetch(`http://127.0.0.1:8080/posts/${postId}/comments`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
