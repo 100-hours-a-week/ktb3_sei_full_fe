@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded',() => {
     isLoading = true;
 
     try {
-      const response = await fetch(`http://localhost:8080/posts?page=${page}&size=${size}&sort=created_at,desc`, {
+      const response = await fetch(`http://localhost:8080/posts?page=${page}&size=${size}&sort=createdAt,desc`, {
         credentials: 'include',
       });
 

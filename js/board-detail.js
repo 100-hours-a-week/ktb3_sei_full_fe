@@ -182,21 +182,29 @@ commentBtn.addEventListener("click", async () => {
   const content = commentTextarea.value.trim();
   if (!content) return;
 
-  if (editingCommentId) {
-    await fetch(`http://127.0.0.1:8080/posts/${postId}/comments/${editingCommentId}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
-      body: JSON.stringify({ content }),
-    });
-  } else {
-    await fetch(`http://127.0.0.1:8080/posts/${postId}/comments`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
-      body: JSON.stringify({ content }),
-    });
+
+  try{
+    let response;
+    if (editingCommentId) {
+      response = await fetch(`http://127.0.0.1:8080/posts/${postId}/comments/${editingCommentId}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ content }),
+      });
+    } else {
+      await fetch(`http://127.0.0.1:8080/posts/${postId}/comments`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ content }),
+      });
   }
+  if (!response.ok) {
+      const message = (await response.json())?.message || "서버 오류가 발생했습니다.";
+      alert(`댓글 등록 실패: ${message}`);
+      return;
+    }
 
   editingCommentId = null;
   commentTextarea.value = "";
@@ -204,6 +212,10 @@ commentBtn.addEventListener("click", async () => {
   commentBtn.style.backgroundColor = "#665A51";
 
   fetchPostDetail();
+  }catch(err){
+    console.error("댓글 등록 중 오류:", err);
+    alert("네트워크 오류가 발생했습니다.");
+  }
 });
 
 
