@@ -2,8 +2,7 @@ import { checkEmailFormat, checkEmailDuplicate } from './modules/validateEmail.j
 import { checkPasswordFormat, checkPasswordMatch } from './modules/validatePassword.js';
 import { checkNicknameDuplication } from './modules/validateNickname.js';
 import { uploadFile } from './modules/uploadFile.js';
-import { showHelperText } from './modules/helperText.js';
-
+import { authFetch } from './modules/authFetch.js';
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.querySelector('.signup-form');
   const emailInput = document.getElementById('email');
@@ -81,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     try {
-      const response = await fetch('http://localhost:8080/users/signup', {
+      const response = await authFetch('http://127.0.0.1:8080/users/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(requestData),

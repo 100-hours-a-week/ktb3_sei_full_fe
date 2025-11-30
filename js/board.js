@@ -1,6 +1,6 @@
 import { setupDropdownMenu, setupDropdownActions } from './modules/dropdownMenu.js';
 import { loadUserProfileIcon } from './modules/profileIcon.js';
-
+import { authFetch } from './modules/authFetch.js';
 document.addEventListener('DOMContentLoaded',() => {
   setupDropdownMenu();
   setupDropdownActions();
@@ -42,12 +42,19 @@ document.addEventListener('DOMContentLoaded',() => {
     const likeCount = formatCount(post.likeCount || 0);
     const commentCount = formatCount(post.commentCount || 0);
     const viewCount = formatCount(post.viewCount || 0);
+    const rawProfile = post.profileImageUrl || null;
+    const profileImageUrl = rawProfile
+  ? `http://127.0.0.1:8080${rawProfile}`
+  : '';
+  
+
+
 
     const card = document.createElement('div');
     card.classList.add('post-card');
     card.innerHTML = `
     <div class="author-row">
-        <div class="author-img" style="background-image:url('${post.authorImageUrl || ''}')"></div>
+        <div class="author-img" style="background-image:url('${profileImageUrl}')"></div>
         <p class="author-name">${post.nickname || '익명 사용자'}</p>
         <span class="date">${date}</span>
     </div>
@@ -57,7 +64,7 @@ document.addEventListener('DOMContentLoaded',() => {
     <div class="meta">
         좋아요 ${likeCount} &nbsp;&nbsp;
         조회수 ${viewCount} &nbsp;&nbsp;
-        댓글 ${commentCount}
+        댓글 ${commentCount} &nbsp;&nbsp;
     </div>
   `;
 
@@ -73,7 +80,7 @@ document.addEventListener('DOMContentLoaded',() => {
     isLoading = true;
 
     try {
-      const response = await fetch(`http://localhost:8080/posts?page=${page}&size=${size}&sort=createdAt,desc`, {
+      const response = await authFetch(`http://127.0.0.1:8080/posts?page=${page}&size=${size}&sort=createdAt,desc`, {
         credentials: 'include',
       });
 

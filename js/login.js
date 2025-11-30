@@ -1,7 +1,7 @@
-import { checkEmailFormat, checkEmailDuplicate } from './modules/validateEmail.js';
-import { checkPasswordFormat, checkPasswordMatch } from './modules/validatePassword.js';
+import { checkEmailFormat } from './modules/validateEmail.js';
+import { checkPasswordFormat } from './modules/validatePassword.js';
 import { showHelperText } from './modules/helperText.js';
-
+import { authFetch } from './modules/authFetch.js';
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         try {
-            const response = await fetch('http://127.0.0.1:8080/users/login', {
+            const response = await authFetch('http://127.0.0.1:8080/users/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 credentials: "include",
@@ -65,9 +65,19 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const data = await response.json();
+
+            const accessToken = data.accessToken;
+            const refreshToken = data.refreshToken;
+
+            window.accessToken = accessToken;
+            localStorage.setItem("refreshToken", refreshToken);
+
+
+        
             alert('로그인 성공!');
             console.log('로그인 성공:', data);
             window.location.href = '/board.html'; 
+
         } catch (error) {
             console.error('로그인 오류:', error);
             alert('서버 연결 중 오류가 발생했습니다.');

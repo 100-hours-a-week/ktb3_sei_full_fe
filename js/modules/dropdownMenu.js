@@ -1,3 +1,5 @@
+import { authFetch } from "./authFetch.js";
+
 export function setupDropdownMenu(profileBtnId = 'profileBtn', menuId = 'dropdownMenu') {
   const profileBtn = document.getElementById(profileBtnId);
   const dropdownMenu = document.getElementById(menuId);
@@ -45,9 +47,14 @@ export function setupDropdownActions(menuId = 'dropdownMenu') {
   }
 
   if (logout) {
-    logout.addEventListener('click', (e) => {
+    logout.addEventListener('click', async (e) => {
       e.preventDefault();
-      localStorage.removeItem('token');
+
+      await authFetch("http://127.0.0.1:8080/users/session",{
+          method:"DELETE",
+          credentials: "include",
+        });
+      
       alert('로그아웃되었습니다.');
       window.location.href = '/welcome.html';
     });

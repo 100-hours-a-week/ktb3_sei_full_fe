@@ -1,3 +1,5 @@
+import { authFetch } from "./authFetch.js";
+
 export async function uploadFile(file, uploadUrl = "http://127.0.0.1:8080/images/upload") {
   if (!file) return null;
 
@@ -5,7 +7,7 @@ export async function uploadFile(file, uploadUrl = "http://127.0.0.1:8080/images
   formData.append("file", file);
 
   try {
-    const response = await fetch(uploadUrl, {
+    const response = await authFetch(uploadUrl, {
       method: "POST",
       body: formData,
       credentials: "include",

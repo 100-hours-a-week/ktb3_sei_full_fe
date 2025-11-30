@@ -1,9 +1,10 @@
+import { authFetch } from "./authFetch.js";
 export async function loadUserProfileIcon() {
 const profileIcon = document.getElementById("profileBtn");
   if (!profileIcon) return;
 
   try {
-    const res = await fetch("http://127.0.0.1:8080/users/profile", { credentials: "include" });
+    const res = await authFetch("http://127.0.0.1:8080/users/profile");
     if (!res.ok) throw new Error("유저 정보를 불러올 수 없습니다.");
     const result = await res.json();
     const user = result.data;

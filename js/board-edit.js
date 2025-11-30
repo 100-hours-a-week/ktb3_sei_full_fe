@@ -2,6 +2,7 @@ import { setupDropdownMenu, setupDropdownActions } from './modules/dropdownMenu.
 import { uploadFile } from "./modules/uploadFile.js";
 import { showHelperText } from './modules/helperText.js'; 
 import { loadUserProfileIcon } from './modules/profileIcon.js';
+import { authFetch } from './modules/authFetch.js';
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -28,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let originalImageUrl = null;
 
   async function fetchPost() {
-    const response = await fetch(`http://127.0.0.1:8080/posts/${postId}`, {
+    const response = await authFetch(`http://127.0.0.1:8080/posts/${postId}`, {
       credentials: "include",
     });
 
@@ -114,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     try {
-      const response = await fetch(`http://127.0.0.1:8080/posts/${postId}`, {
+      const response = await authFetch(`http://127.0.0.1:8080/posts/${postId}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

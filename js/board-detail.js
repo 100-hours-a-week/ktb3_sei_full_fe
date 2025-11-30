@@ -1,5 +1,7 @@
 import { setupDropdownMenu, setupDropdownActions } from './modules/dropdownMenu.js';
 import { loadUserProfileIcon } from './modules/profileIcon.js';
+import { authFetch } from './modules/authFetch.js';
+
 
 
 const urlParams = new URLSearchParams(window.location.search);
@@ -47,7 +49,7 @@ function formatNumber(num) {
 }
 
 async function fetchPostDetail() {
-  const response = await fetch(`http://127.0.0.1:8080/posts/${postId}`, {
+  const response = await authFetch(`http://127.0.0.1:8080/posts/${postId}`, {
     credentials: "include",
   });
   const result = await response.json();
@@ -76,11 +78,13 @@ function updateLikeUI() {
 
 
 function renderPost(post) {
+ 
+
   titleEl.textContent = post.title;
   authorNameEl.textContent = post.nickname;
   dateEl.textContent = post.createdAt;
 
-  let imgUrl = post.imageUrl;
+  let imgUrl = post.image_url;
 
   if (!imgUrl || imgUrl.trim() === "") {
     imageEl.style.display = "none";   // ← 회색 네모 숨기기
@@ -109,7 +113,7 @@ function renderPost(post) {
 
 async function toggleLike() {
   try {
-    const response = await fetch(`http://127.0.0.1:8080/posts/${postId}/likes`, {
+    const response = await authFetch(`http://127.0.0.1:8080/posts/${postId}/likes`, {
       method: "POST",
       credentials: "include",
     });
@@ -136,12 +140,15 @@ function renderComments(comments) {
     node.classList.add("comment");
     node.dataset.id = c.id;
 
+    const profileUrl = c.profileImageUrl
+      ? `http://127.0.0.1:8080${c.profileImageUrl}`
+      : '/images/profile.png';
+
     node.innerHTML = `
       <div class="comment-left">
-        <div class="comment-author-img"></div>
-        <div>
+<div class="comment-author-img" style="background-image:url('${profileUrl}')"></div>        <div>
           <p class="author-name">${c.nickname}</p>
-          <p class="comment-meta">${c.created_at}</p>
+          <p class="comment-meta">${c.createdAt}</p>
           <p class="comment-body">${c.content}</p>
         </div>
       </div>
@@ -185,14 +192,14 @@ commentBtn.addEventListener("click", async () => {
   try{
     let response;
     if (editingCommentId) {
-      response = await fetch(`http://127.0.0.1:8080/posts/${postId}/comments/${editingCommentId}`, {
+      response = await authFetch(`http://127.0.0.1:8080/posts/${postId}/comments/${editingCommentId}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
         body: JSON.stringify({ content }),
       });
     } else {
-      response = await fetch(`http://127.0.0.1:8080/posts/${postId}/comments`, {
+      response = await authFetch(`http://127.0.0.1:8080/posts/${postId}/comments`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -223,7 +230,7 @@ confirmCommentDelete.addEventListener("click", async () => {
   if (!deletingCommentId) return;
 
   try {
-    const response = await fetch(`http://127.0.0.1:8080/posts/${postId}/comments/${deletingCommentId}`, {
+    const response = await authFetch(`http://127.0.0.1:8080/posts/${postId}/comments/${deletingCommentId}`, {
       method: "DELETE",
       credentials: "include",
     });
@@ -258,7 +265,7 @@ editPostBtn.addEventListener("click", () => {
 
 confirmPostDelete.addEventListener("click", async () => {
   try {
-    const response = await fetch(`http://127.0.0.1:8080/posts/${postId}`, {
+    const response = await authFetch(`http://127.0.0.1:8080/posts/${postId}`, {
       method: "DELETE",
       credentials: "include",
     });

@@ -1,5 +1,5 @@
 import {showHelperText} from './helperText.js';
-
+import { authFetch } from './authFetch.js';
 
 export async function checkNicknameDuplication(nicknameInput){
     const nickname = nicknameInput.value.trim();
@@ -9,7 +9,7 @@ export async function checkNicknameDuplication(nicknameInput){
     }
 
     try{
-    const response = await fetch(`http://localhost:8080/users?nickname=${encodeURIComponent(nickname)}`);
+    const response = await authFetch(`http://127.0.0.1:8080/users?nickname=${encodeURIComponent(nickname)}`);
     const message = await response.text();
     showHelperText(nicknameInput, message);
 

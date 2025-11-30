@@ -3,6 +3,7 @@ import { showHelperText } from './modules/helperText.js';
 import { checkNicknameDuplication } from './modules/validateNickname.js';
 import { uploadFile } from './modules/uploadFile.js';
 import { loadUserProfileIcon } from './modules/profileIcon.js';
+import { authFetch } from './modules/authFetch.js';
 
 const profileCircle = document.querySelector(".profile-circle");
 const profileImg = document.getElementById("profileImage");
@@ -25,7 +26,7 @@ let originalNickname = "";
 
 async function loadProfile() {
   try {
-    const res = await fetch("http://127.0.0.1:8080/users/profile", { credentials: "include" });
+    const res = await authFetch("http://127.0.0.1:8080/users/profile", { credentials: "include" });
     const result = await res.json();
     if (!res.ok) throw new Error(result.message || "불러오기 실패");
 
@@ -111,7 +112,7 @@ editBtn.addEventListener("click", async () => {
       : null);
 
   try {
-    const res = await fetch("http://127.0.0.1:8080/users/profile", {
+    const res = await authFetch("http://127.0.0.1:8080/users/profile", {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
@@ -137,7 +138,7 @@ cancelModal.addEventListener("click", () => {
   modalOverlay.style.display = "none";
 });
 confirmModal.addEventListener("click", async () => {
-  await fetch("http://127.0.0.1:8080/users/profile", {
+  await authFetch("http://127.0.0.1:8080/users/profile", {
     method: "DELETE",
     credentials: "include",
   });

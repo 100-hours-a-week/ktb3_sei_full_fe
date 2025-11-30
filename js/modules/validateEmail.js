@@ -1,5 +1,5 @@
 import { showHelperText } from './helperText.js';
-
+import { authFetch } from './authFetch.js';
 export function checkEmailFormat(emailInput){
     const email = emailInput.value.trim();
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -25,7 +25,7 @@ export async function checkEmailDuplicate(emailInput){
         return false;
     }
     try{
-        const response = await fetch(`http://localhost:8080/users?email=${encodeURIComponent(email)}`);
+        const response = await authFetch(`http://127.0.0.1:8080/users?email=${encodeURIComponent(email)}`);
 ;
         const message = await response.text();
 
