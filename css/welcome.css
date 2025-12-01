@@ -5,6 +5,12 @@ body {
   overflow: hidden;
 }
 
+.main-logo {
+  width: 400px;        
+  height: auto;
+  display: block;
+  margin: 30px auto 30px;    
+}
 
 .welcome-wrapper {
   width: 100vw;
